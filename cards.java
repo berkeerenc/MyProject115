@@ -146,4 +146,105 @@ public class cards {
             numcards++;
         }
     }
+    public void startGame() {
+        System.out.println("");
+        System.out.println("The users hand is: ");
+        while (k < 4) {
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + ")" + usersHand[i]);
+            }
+            System.out.println("");
+            System.out.println("The computers hand is: ");
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + ")" + computersHand[i]);
+            }
+            System.out.println("What is your card?= ");
+            firstcard = sc.nextInt();
+            comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
+            System.out.println("Here's the computer's card..");
+            secondcard = sc.nextInt();
+            System.out.println(computersHand[secondcard]);
+            comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
+            k++;
+        }
+        dealuserCards();
+        System.out.println("");
+        System.out.println("The users hand is: ");
+        while (k < 8) {
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + ")" + usersHand[i]);
+            }
+            System.out.println("");
+            System.out.println("The computers hand is: ");
+            for (int i = 0; i < 4; i++) {
+                System.out.println(i + ")" + computersHand[i]);
+            }
+            System.out.println("What is your card?= ");
+            firstcard = sc.nextInt();
+            comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
+            System.out.println("Here's the computer's card..");
+            secondcard = sc.nextInt();
+            System.out.println(computersHand[secondcard]);
+            comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
+            k++;
+        }
+    }
+    public void comparetoCards(String[] compare, int comparecard, String[] compareTreasure, int pistiCounter) {
+        if (boardcardnumbers == 0) {
+            board[boardarraycardnumbers] = compare[comparecard];
+            compare[comparecard] = null;
+            boardcardnumbers++;
+            for (int i = boardarraycardnumbers; i < boardcardnumbers + boardarraycardnumbers; i++) {
+                System.out.println(board[i]);
+            }
+        } else if (boardcardnumbers == 1) {
+            if (compare[comparecard].charAt(5) == board[boardarraycardnumbers].charAt(5) || compare[comparecard].charAt(5) == 'J') {
+                System.out.println("Congratulations!!.." + "\n" + "PİSTİİİİİ!!!!");
+                pistiCounter++;
+                for (int i = 0; i <= boardarraycardnumbers; i++) {
+                    compareTreasure[i] = board[i];
+                    System.out.println("Treasure are:" + compareTreasure[i]);
+                    board[i] = null;
+                }
+                boardcardnumbers = 0;
+                boardarraycardnumbers++;
+                compare[comparecard] = null;
+            } else {
+                boardarraycardnumbers++;
+                board[boardarraycardnumbers] = compare[comparecard];
+                compare[comparecard] = null;
+                for (int i = 0; i <= boardarraycardnumbers; i++) {
+                    System.out.println(board[i]);
+                }
+                boardcardnumbers++;
+            }
+        } else {
+            if (compare[comparecard].charAt(5) == board[boardarraycardnumbers].charAt(5) || compare[comparecard].charAt(5) == 'J') {
+                System.out.println("You win the all cards!!");
+                boardarraycardnumbers++;
+                board[boardarraycardnumbers] = compare[comparecard];
+                // KAZANDIĞI KARTLARI KENDİ HAZNESİNE ALMADA SORUN YAŞADIM ONU ÇÖZ.
+                for (int i = 0; i <= boardarraycardnumbers; i++) {
+                    if (board[i] != null) {
+                        compareTreasure[i] = board[i];
+                    } else {
+                        continue;
+                    }
+                    System.out.println("Treasure are:" + compareTreasure[i]);
+                    board[i] = null;
+                }
+                boardcardnumbers = 0;
+                boardarraycardnumbers++;
+                compare[comparecard] = null;
+            } else {
+                boardarraycardnumbers++;
+                board[boardarraycardnumbers] = compare[comparecard];
+                compare[comparecard] = null;
+                for (int i = 0; i <= boardarraycardnumbers; i++) {
+                    System.out.println(board[i]);
+                }
+                boardcardnumbers++;
+            }
+        }
+    }
 }

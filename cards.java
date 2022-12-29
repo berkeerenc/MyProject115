@@ -294,4 +294,22 @@ public class cards {
         System.out.println(computersHand[computerscard]);
         comparetoCards(computersHand, computerscard, computersTreasure, computersPisti);
     }
+    public void lastWinner(){
+        if(lastWinner){
+            for (int i = 0; i <= boardarraycardnumbers+boardcardnumbers; i++) {
+                if(board[i] != null) {
+                    usersTreasure[i] = board[i];
+                    System.out.println("Users Treasure are:" + usersTreasure[i]);
+                }
+                board[i] = null;
+            }
+        } else {
+            for (int i = 0; i <= boardarraycardnumbers+boardcardnumbers; i++) {
+                if(board[i] != null) {
+                    computersTreasure[i] = board[i];
+                    System.out.println("Computers Treasure are:" + computersTreasure[i]);
+                }
+                board[i] = null;
+            }
+        }
 }

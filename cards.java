@@ -135,45 +135,36 @@ public class cards {
         }
     }
     public void startGame() {
+    	dealboardCards();
+        dealuserCards();
         System.out.println("");
-        System.out.println("The users hand is: ");
         while (k < 4) {
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + ")" + usersHand[i]);
-            }
-            System.out.println("");
-            System.out.println("The computers hand is: ");
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + ")" + computersHand[i]);
-            }
-            System.out.println("What is your card?= ");
-            firstcard = sc.nextInt();
-            comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
-            System.out.println("Here's the computer's card..");
-            computerplay();
-            System.out.println(computersHand[secondcard]);
-            comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
+           oneTurn();
             k++;
         }
         dealuserCards();
-        System.out.println("");
-        System.out.println("The users hand is: ");
         while (k < 8) {
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + ")" + usersHand[i]);
-            }
-            System.out.println("");
-            System.out.println("The computers hand is: ");
-            for (int i = 0; i < 4; i++) {
-                System.out.println(i + ")" + computersHand[i]);
-            }
-            System.out.println("What is your card?= ");
-            firstcard = sc.nextInt();
-            comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
-            System.out.println("Here's the computer's card..");
-            computerplay();
-            System.out.println(computersHand[secondcard]);
-            comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
+            oneTurn();
+            k++;
+        }
+        dealuserCards();
+        while( k< 12){
+            oneTurn();
+            k++;
+        }
+        dealuserCards();
+        while ( k < 16){
+            oneTurn();
+            k++;
+        }
+        dealuserCards();
+        while ( k < 20){
+            oneTurn();
+            k++;
+        }
+        dealuserCards();
+        while ( k < 24){
+            oneTurn();
             k++;
         }
     }
@@ -191,7 +182,7 @@ public class cards {
             if (compare[comparecard].charAt(5) == board[boardarraycardnumbers].charAt(5) || compare[comparecard].charAt(5) == 'J') {
                 boardarraycardnumbers++;
                 board[boardarraycardnumbers] = compare[comparecard];
-                if(comparecard == secondcard){
+                if(comparecard == computerscard){
                     computersPisti++;
                     lastWinner = false;
                 } else{
@@ -223,7 +214,7 @@ public class cards {
         } else {
             if (compare[comparecard].charAt(5) == board[boardarraycardnumbers].charAt(5) || compare[comparecard].charAt(5) == 'J') {
                 System.out.println("You win the all cards!!");
-                if(comparecard == secondcard){
+                if(comparecard == computerscard){
                     lastWinner = false;
                 } else{
                     lastWinner = true;
@@ -260,14 +251,14 @@ public class cards {
             if (board[boardarraycardnumbers] != null) {
                 if (computersHand[i] != null) {
                     if (board[boardarraycardnumbers].charAt(5) == computersHand[i].charAt(5)) {
-                        secondcard = i;
+                        computerscard = i;
                         break;
                     }  else {
-                        secondcard = emptyBoardCard();
+                        computerscard = emptyBoardCard();
                     }
                 }
             } else {
-                secondcard = emptyBoardCard();
+                computerscard = emptyBoardCard();
                 break;
             }
         }
@@ -284,5 +275,23 @@ public class cards {
         } else {
             return 3;
         }
+    }
+    public void oneTurn(){
+        System.out.println("The users hand is: ");
+        for (int i = 0; i < 4; i++) {
+            System.out.println(i + ")" + usersHand[i]);
+        }
+        System.out.println("");
+        System.out.println("The computers hand is: ");
+        for (int i = 0; i < 4; i++) {
+            System.out.println(i + ")" + computersHand[i]);
+        }
+        System.out.println("What is your card?= ");
+        firstcard = sc.nextInt();
+        comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
+        System.out.println("Here's the computer's card.." + "\n");
+        computerplay();
+        System.out.println(computersHand[computerscard]);
+        comparetoCards(computersHand, computerscard, computersTreasure, computersPisti);
     }
 }

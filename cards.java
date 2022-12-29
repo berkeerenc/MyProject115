@@ -1,89 +1,76 @@
 import java.util.Scanner;
 
 public class cards {
-	Scanner sc = new Scanner(System.in);
-    public int usersPisti;
-    public int computersPisti;
-    public int totalwincardnumber;
-    public int lastboardcardnumbers;
-    public int boardcardnumbers;
-    public int computersfirstcard;
-    public int computerssecondcard;
-    public int computersthirdcard;
-    public int computersfourthcard;
-    public int firstcard;
-    public int secondcard;
-    public int boardarraycardnumbers;
-    public int thirdcard;
-    public int fourthcard;
-    public int k;
-    public int numcards;
-    public String[] board;
-    public String[] usersHand;
-    public String[] computersHand;
-    private int[] cards;
-    private String[] suits;
-    private String[] ranks;
-    private String[] decks;
-    public String[] usersTreasure;
-    public String[] compareTreasure;
-    public String[] computersTreasure;
-    public boolean lastWinner;
+	 public int usersPisti;
+	    public int computersPisti;
+	    public int totalwincardnumber;
+	    public int boardcardnumbers;
+	    public int firstcard;
+	    public int computerscard;
+	    public int boardarraycardnumbers;
+	    public int k;
+	    public int numcards;
+	    public String[] board;
+	    public String[] usersHand;
+	    public String[] computersHand;
+	    private int[] cards;
+	    private String[] suits;
+	    private String[] ranks;
+	    private String[] decks;
+	    public String[] usersTreasure;
+	    public String[] compareTreasure;
+	    public String[] computersTreasure;
+	    public String[] specialPoint1;
+	    public String[] specialPoint2;
+	    public int userpoint;
+	    public int computerpoint;
+	    public int userTotalCard;
+	    public int computerTotalCard;
+	    public boolean userMakePisti;
+	    private  boolean lastWinner;
+	    private  boolean success;
+	    private boolean success2;
 
     public cards() {
-        cards = new int[52];
+    	cards = new int[52];
         suits = new String[]{"♠", "♣", "♥", "♦"};
         ranks = new String[]{"A(Ace)", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J(Jack)", "Q(Queen)", "K(King)"};
         decks = new String[52];
-        board = new String[52];
+        board = new String[130];
         usersHand = new String[4];
         computersHand = new String[4];
+        specialPoint1 = new String[] {"♦"+  " of " + "10"};
+        specialPoint2 = new String[] {"♣" + " of " + "2"};
         numcards = 0;
-        firstcard = 0;
-        secondcard = 0;
-        thirdcard = 0;
-        fourthcard = 0;
-        computersfirstcard = 0;
-        computerssecondcard = 0;
-        computersthirdcard = 0;
-        computersfourthcard = 0;
-        usersTreasure = new String[52];
-        compareTreasure= new String[52];
-        computersTreasure = new String[52];
+        computerscard = 0;
+        usersTreasure = new String[130];
+        compareTreasure = new String[130];
+        computersTreasure = new String[130];
         boardcardnumbers = 4;
         boardarraycardnumbers = 3;
         totalwincardnumber = 0;
         k = 0;
         usersPisti = 0;
         computersPisti = 0;
+        userpoint = 0;
+        computerpoint = 0;
+        userTotalCard = 0;
+        computerTotalCard = 0;
+        userMakePisti = false;
         lastWinner = true;
+        success = false;
+        success2 = false;
     }
 
-    public void setCards(int[] a) {
-        cards = a;
+    public void createCard() {
+        for (int i = 0; i < cards.length; i++) {
+            cards[i] = i;
+            decks[i] = suits[cards[i] / 13] + " of " + ranks[cards[i] % 13];
+            System.out.println((i + 1) + ")" + decks[i]);
+        }
+        displayCard();
     }
-
-    public int[] getCards() {
-        return cards;
-    }
-
-    public void setSuits(String[] a) {
-        suits = a;
-    }
-
-    public String[] getSuits() {
-        return suits;
-    }
-
-    public void setRanks(String[] a) {
-        ranks = a;
-    }
-
-    public String[] getRanks() {
-        return ranks;
-    }
-
-    public void shuffleandcutCard() {
+    public void shuffleCard() {
         for (int i = 0; i < cards.length; i++) {
             cards[i] = i;
         }
@@ -94,6 +81,9 @@ public class cards {
             cards[index] = temp;
         }
         displayCard();
+    }
+    
+    public void cutCards(){
         System.out.println("Cutting the cards...");
         System.out.println(" ");
         System.out.println(" ");
@@ -104,18 +94,14 @@ public class cards {
         }
         displayCard();
     }
-
     public void displayCard() {
         for (int i = 0; i < cards.length; i++) {
             decks[i] = suits[cards[i] / 13] + " of " + ranks[cards[i] % 13];
-            System.out.println((i + 1) + ")" + decks[i]);
         }
     }
-
     public void setDecks(String[] a) {
         decks = a;
     }
-
     public String[] getDecks() {
         return decks;
     }

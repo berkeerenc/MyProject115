@@ -164,7 +164,7 @@ public class cards {
             firstcard = sc.nextInt();
             comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
             System.out.println("Here's the computer's card..");
-            secondcard = sc.nextInt();
+            computerplay();
             System.out.println(computersHand[secondcard]);
             comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
             k++;
@@ -185,7 +185,7 @@ public class cards {
             firstcard = sc.nextInt();
             comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
             System.out.println("Here's the computer's card..");
-            secondcard = sc.nextInt();
+            computerplay();
             System.out.println(computersHand[secondcard]);
             comparetoCards(computersHand, secondcard, compareTreasure, computersPisti);
             k++;
@@ -267,6 +267,36 @@ public class cards {
                 }
                 boardcardnumbers++;
             }
+        }
+    }
+    public void computerplay() {
+        for (int i = 0; i < 4; i++) {
+            if (board[boardarraycardnumbers] != null) {
+                if (computersHand[i] != null) {
+                    if (board[boardarraycardnumbers].charAt(5) == computersHand[i].charAt(5)) {
+                        secondcard = i;
+                        break;
+                    }  else {
+                        secondcard = emptyBoardCard();
+                    }
+                }
+            } else {
+                secondcard = emptyBoardCard();
+                break;
+            }
+        }
+    }
+    public int emptyBoardCard(){
+        if(computersHand[0] != null){
+            return 0;
+        }
+        else if(computersHand[1] != null){
+            return 1;
+        }
+         else if(computersHand[2] != null){
+            return 2;
+        } else {
+            return 3;
         }
     }
 }

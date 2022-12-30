@@ -1,38 +1,41 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
-
 public class cards {
-	 public int usersPisti;
-	    public int computersPisti;
-	    public int totalwincardnumber;
-	    public int boardcardnumbers;
-	    public int firstcard;
-	    public int computerscard;
-	    public int boardarraycardnumbers;
-	    public int k;
-	    public int numcards;
-	    public String[] board;
-	    public String[] usersHand;
-	    public String[] computersHand;
-	    private int[] cards;
-	    private String[] suits;
-	    private String[] ranks;
-	    private String[] decks;
-	    public String[] usersTreasure;
-	    public String[] compareTreasure;
-	    public String[] computersTreasure;
-	    public String[] specialPoint1;
-	    public String[] specialPoint2;
-	    public int userpoint;
-	    public int computerpoint;
-	    public int userTotalCard;
-	    public int computerTotalCard;
-	    public boolean userMakePisti;
-	    private  boolean lastWinner;
-	    private  boolean success;
-	    private boolean success2;
-
+    Scanner sc = new Scanner(System.in);
+    public int usersPisti;
+    public int computersPisti;
+    public int totalwincardnumber;
+    public int boardcardnumbers;
+    public int firstcard;
+    public int computerscard;
+    public int boardarraycardnumbers;
+    public int k;
+    public int numcards;
+    public String[] board;
+    public String[] usersHand;
+    public String[] computersHand;
+    private int[] cards;
+    private String[] suits;
+    private String[] ranks;
+    private String[] decks;
+    public String[] usersTreasure;
+    public String[] compareTreasure;
+    public String[] computersTreasure;
+    public String[] specialPoint1;
+    public String[] specialPoint2;
+    public int userpoint;
+    public int computerpoint;
+    public int userTotalCard;
+    public int computerTotalCard;
+    public boolean userMakePisti;
+    private  boolean lastWinner;
+    private  boolean success;
+    private boolean success2;
     public cards() {
-    	cards = new int[52];
+        cards = new int[52];
         suits = new String[]{"♠", "♣", "♥", "♦"};
         ranks = new String[]{"A(Ace)", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J(Jack)", "Q(Queen)", "K(King)"};
         decks = new String[52];
@@ -61,7 +64,24 @@ public class cards {
         success = false;
         success2 = false;
     }
-
+    public void setCards(int[] a) {
+        cards = a;
+    }
+    public int[] getCards() {
+        return cards;
+    }
+    public void setSuits(String[] a) {
+        suits = a;
+    }
+    public String[] getSuits() {
+        return suits;
+    }
+    public void setRanks(String[] a) {
+        ranks = a;
+    }
+    public String[] getRanks() {
+        return ranks;
+    }
     public void createCard() {
         for (int i = 0; i < cards.length; i++) {
             cards[i] = i;
@@ -71,21 +91,20 @@ public class cards {
         displayCard();
     }
     public void shuffleCard() {
+        System.out.println("Shuffling the cards...");
         for (int i = 0; i < cards.length; i++) {
             cards[i] = i;
         }
         for (int i = 0; i < cards.length; i++) {
-            int index = (int) (Math.random() * cards.length);
+            int index = (int) (Math.random() * 52);
             int temp = cards[i];
             cards[i] = cards[index];
             cards[index] = temp;
         }
         displayCard();
     }
-    
     public void cutCards(){
         System.out.println("Cutting the cards...");
-        System.out.println(" ");
         System.out.println(" ");
         for (int i = 0; i < 26; i++) {
             int temp = cards[i];
@@ -105,11 +124,9 @@ public class cards {
     public String[] getDecks() {
         return decks;
     }
-
     public void dealboardCards() {
         System.out.println("");
-        System.out.println("");
-        System.out.println("The board is: ");
+        System.out.println("The board is(at the bottom card in the list,it is the upperd card at the board): ");
         boardcardnumbers = 4;
         for (int i = 0; i < 4; i++) {
             board[i] = decks[i];
@@ -117,25 +134,20 @@ public class cards {
             numcards++;
         }
     }
-
     public void dealuserCards() {
         System.out.println("");
-        System.out.println("The users hand is: ");
         for (int i = 0; i < 4; i++) {
             usersHand[i] = decks[numcards];
-            System.out.println(i + ")" + usersHand[i]);
             numcards++;
         }
         System.out.println("");
-        System.out.println("The computers hand is: ");
         for (int i = 0; i < 4; i++) {
             computersHand[i] = decks[numcards];
-            System.out.println(i + ")" + computersHand[i]);
             numcards++;
         }
     }
     public void startGame() {
-    	dealboardCards();
+        dealboardCards();
         dealuserCards();
         System.out.println("");
         while (k < 4) {
@@ -173,6 +185,7 @@ public class cards {
             board[boardarraycardnumbers] = compare[comparecard];
             compare[comparecard] = null;
             boardcardnumbers++;
+            System.out.println("The board is(at the bottom card in the list,it is the upperd card at the board): ");
             for (int i = boardarraycardnumbers; i < boardcardnumbers + boardarraycardnumbers; i++) {
                 if(board[i] != null) {
                     System.out.println(board[i]);
@@ -204,6 +217,7 @@ public class cards {
                 boardarraycardnumbers++;
                 board[boardarraycardnumbers] = compare[comparecard];
                 compare[comparecard] = null;
+                System.out.println("The board is(at the bottom card in the list,it is the upperd card at the board): ");
                 for (int i = 0; i <= boardarraycardnumbers; i++) {
                     if(board[i] != null) {
                         System.out.println(board[i]);
@@ -237,6 +251,7 @@ public class cards {
                 boardarraycardnumbers++;
                 board[boardarraycardnumbers] = compare[comparecard];
                 compare[comparecard] = null;
+                System.out.println("The board is(at the bottom card in the list,it is the upperd card at the board): ");
                 for (int i = 0; i <= boardarraycardnumbers; i++) {
                     if(board[i] != null){
                     System.out.println(board[i]);
@@ -314,6 +329,57 @@ public class cards {
         System.out.println(computersHand[computerscard]);
         comparetoCards(computersHand, computerscard, computersTreasure, computersPisti);
     }
+    public void userPointsCalculator(){
+        for (String s : usersTreasure) {
+            if (s != null) {
+                userTotalCard++;
+                if ((s.charAt(0) == '♦' && s.charAt(5) == '1')) {
+                    userpoint += 3;
+                } else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
+                    userpoint +=2;
+                } else {
+                    userpoint += 1;
+                }
+            }
+        }
+        userpoint = userpoint + (usersPisti*10);
+        System.out.println("User point is: " + userpoint);
+    }
+    public void computerPointsCalculator(){
+        for (String s : computersTreasure) {
+            if (s != null) {
+                computerTotalCard++;
+                if ((s.charAt(0) == '♦' && s.charAt(5) == '1') ) {
+                    computerpoint += 3;
+                }else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
+                    computerpoint +=2;
+                }
+                else {
+                    computerpoint += 1;
+                }
+            }
+        }
+        computerpoint = computerpoint + (computersPisti*10);
+        System.out.println("computer point is: " + computerpoint);
+    }
+    public void totalPoint(){
+        if (computerTotalCard > userTotalCard){
+            computerpoint +=3;
+        } else if ( userTotalCard > computerTotalCard) {
+            userpoint +=3;
+        } else{
+            System.out.println("Total cards are equals!!!!");
+        }
+        System.out.println("Total computer point is: " + computerpoint);
+        System.out.println("Total user point is: " + userpoint);
+        if(computerpoint > userpoint){
+            System.out.println("COMPUTER WİN!!!!!!!!");
+        } else if(userpoint > computerpoint){
+            System.out.println("USER WİN!!!!!!!!");
+        } else {
+            System.out.println("DRAWWWW");
+        }
+    }
     public void lastWinner(){
         if(lastWinner){
             for (int i = 0; i <= boardarraycardnumbers+boardcardnumbers; i++) {
@@ -332,55 +398,65 @@ public class cards {
                 board[i] = null;
             }
         }
-        public void userPointsCalculator(){
-        	for (String s : usersTreasure) {
-                if (s != null) {
-                    userTotalCard++;
-                    if ((s.charAt(0) == '♦' && s.charAt(5) == '1')) {
-                        userpoint += 3;
-                    } else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
-                        userpoint +=2;
-                    } else {
-                        userpoint += 1;
+        System.out.println("Users Treasure are: ");
+        for( String u : usersTreasure ){
+            if( u != null){
+                System.out.println(u);
+            }
+        }
+        System.out.println("Users's total pisti number is: " + usersPisti);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Computers Treasure are: ");
+        for (String c : computersTreasure){
+            if( c != null){
+                System.out.println(c);
+            }
+        }
+        System.out.println("Computer's total pisti number is: " + computersPisti);
+    }
+    public static void useHighScoreList(String temp , int point) throws IOException {
+        cards card = new cards();
+        highScore newScore = new highScore(temp, point);
+        File file = new File("C:\\Users\\berke\\IdeaProjects\\projectTry\\scoreboard.txt");
+        Scanner fileReader = new Scanner(file);
+        highScore[] highScores = new highScore[10];
+        int count = 0;
+        while (fileReader.hasNextLine()){
+            String score = fileReader.nextLine();
+            highScores[count] = new highScore(score.strip().split(",")[0], Integer.parseInt(score.strip().split(",")[1]));
+            count++;
+        }
+        int scoresCount = 0;
+        for (highScore k : highScores){
+            if (k != null)
+                scoresCount++;
+        }
+        if (scoresCount == 0) {
+            highScores[0] = newScore;
+        } else {
+            System.out.println(scoresCount);
+            for (int s = 0; s < highScores.length; s++) {
+                if (highScores[s] != null && newScore.score > highScores[s].score){
+                    for (int n = highScores.length - 1; n > s; n--){
+                        highScores[n] = highScores[n - 1];
                     }
+                    highScores[s] = newScore;
+                    break;
+                } else if (highScores[s] == null){
+                    highScores[s] = newScore;
+                    break;
                 }
             }
-            userpoint = userpoint + (usersPisti*10);
-            System.out.println("User point is: " + userpoint);
         }
-        public void computerPointsCalculator(){
-        	for (String s : computersTreasure) {
-                if (s != null) {
-                    computerTotalCard++;
-                    if ((s.charAt(0) == '♦' && s.charAt(5) == '1') ) {
-                        computerpoint += 3;
-                    }else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
-                        computerpoint +=2;
-                    }
-                    else {
-                        computerpoint += 1;
-                    }
-                }
-            }
-            computerpoint = computerpoint + (computersPisti*10);
-            System.out.println("computer point is: " + computerpoint);
-        }
-        public void totalPoint(){
-            if (computerTotalCard > userTotalCard){
-                computerpoint +=3;
-            } else if ( userTotalCard > computerTotalCard) {
-                userpoint +=3;
-            } else{
-                System.out.println("Total cards are equals!!!!");
-            }
-            System.out.println("Total computer point is: " + computerpoint);
-            System.out.println("Total user point is: " + userpoint);
-            if(computerpoint > userpoint){
-                System.out.println("COMPUTER WİN!!!!!!!!");
-            } else if(userpoint > computerpoint){
-                System.out.println("USER WİN!!!!!!!!");
-            } else {
-                System.out.println("DRAWWWW");
+        String scoreString = "";
+        for (highScore scr : highScores){
+            if (scr != null){
+                scoreString += scr.name + "," + scr.score + "\n";
             }
         }
+        FileWriter fileWriter = new FileWriter("C:\\Users\\berke\\IdeaProjects\\projectTry\\scoreboard.txt");
+        fileWriter.write(scoreString);
+        fileWriter.close();
+    }
 }

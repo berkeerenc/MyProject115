@@ -312,4 +312,55 @@ public class cards {
                 board[i] = null;
             }
         }
+        public void userPointsCalculator(){
+        	for (String s : usersTreasure) {
+                if (s != null) {
+                    userTotalCard++;
+                    if ((s.charAt(0) == '♦' && s.charAt(5) == '1')) {
+                        userpoint += 3;
+                    } else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
+                        userpoint +=2;
+                    } else {
+                        userpoint += 1;
+                    }
+                }
+            }
+            userpoint = userpoint + (usersPisti*10);
+            System.out.println("User point is: " + userpoint);
+        }
+        public void computerPointsCalculator(){
+        	for (String s : computersTreasure) {
+                if (s != null) {
+                    computerTotalCard++;
+                    if ((s.charAt(0) == '♦' && s.charAt(5) == '1') ) {
+                        computerpoint += 3;
+                    }else if((s.charAt(0) == '♣' && s.charAt(5) == '2')){
+                        computerpoint +=2;
+                    }
+                    else {
+                        computerpoint += 1;
+                    }
+                }
+            }
+            computerpoint = computerpoint + (computersPisti*10);
+            System.out.println("computer point is: " + computerpoint);
+        }
+        public void totalPoint(){
+            if (computerTotalCard > userTotalCard){
+                computerpoint +=3;
+            } else if ( userTotalCard > computerTotalCard) {
+                userpoint +=3;
+            } else{
+                System.out.println("Total cards are equals!!!!");
+            }
+            System.out.println("Total computer point is: " + computerpoint);
+            System.out.println("Total user point is: " + userpoint);
+            if(computerpoint > userpoint){
+                System.out.println("COMPUTER WİN!!!!!!!!");
+            } else if(userpoint > computerpoint){
+                System.out.println("USER WİN!!!!!!!!");
+            } else {
+                System.out.println("DRAWWWW");
+            }
+        }
 }

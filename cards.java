@@ -281,14 +281,34 @@ public class cards {
         for (int i = 0; i < 4; i++) {
             System.out.println(i + ")" + usersHand[i]);
         }
-        System.out.println("");
-        System.out.println("The computers hand is: ");
-        for (int i = 0; i < 4; i++) {
-            System.out.println(i + ")" + computersHand[i]);
-        }
-        System.out.println("What is your card?= ");
-        firstcard = sc.nextInt();
-        comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
+        do {
+            try {
+                System.out.println("What is your card?= ");
+                Scanner sc = new Scanner(System.in);
+                firstcard = sc.nextInt();
+                success = true;
+            } catch (Exception e) {
+                System.out.println("Could not get integer , please enter integer number");
+                success = false;
+            }
+            if(success){
+            if(firstcard >= 0 && firstcard <=3){
+                if(usersHand[firstcard]!= null){
+                    comparetoCards(usersHand, firstcard, usersTreasure, usersPisti);
+                    success2 = true;
+                }else {
+                    System.out.println("You have already played this card.Play different card.");
+                    success2 = false;
+                }
+            } else if (firstcard <= 0){
+                System.out.println("The card range you can play is between 0-3, please enter a number in this range.");
+                success2 = false;
+            } else{
+                System.out.println("The card range you can play is between 0-3, please enter a number in this range.");
+                success2 = false;
+            }
+            }
+        } while(!success || !success2);
         System.out.println("Here's the computer's card.." + "\n");
         computerplay();
         System.out.println(computersHand[computerscard]);
